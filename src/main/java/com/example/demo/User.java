@@ -29,10 +29,10 @@ public class User {
         this.lastName = lastName;
     }
 //email
-    public String getContact(){
+    public String getEmail(){
         return email;
     }
-    public void setContact(){
+    public void setEmail(){
         this.email = email;
     }
 }
