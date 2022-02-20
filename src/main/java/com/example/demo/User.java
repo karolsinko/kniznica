@@ -13,4 +13,26 @@ public class User {
         this.lastName = lastName;
         this.email = email;
     }
+
+//krstne meno
+    public String getFirstName(){
+        return firstName;
+    }
+    public void setFirstName(){
+        this.firstName = firstName;
+    }
+//priezvisko
+    public String getLastName(){
+        return lastName;
+    }
+    public void setLastName(){
+        this.lastName = lastName;
+    }
+//email
+    public String getContact(){
+        return email;
+    }
+    public void setContact(){
+        this.email = email;
+    }
 }

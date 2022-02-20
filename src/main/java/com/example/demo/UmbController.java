@@ -1,32 +1,51 @@
-/* package com.example.demo;
+package com.example.demo;
 
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-/*
+
 @RestController
 public class UmbController {
-      private List<Book> books;
+    private List<Book> books;
+    private List<User> users;
 
     public UmbController(){
         this.books = init();
+        this.users = init();
     }
 
     private List<Book> init(){
-        List<Book> books = new ArrayList<>();
-        Book book = new Book();
-        book.setAuthor("a");
-        book.setTitle("b");
-        books.add(book);
 
-        Book book2 = new Book();
-        book2.setAuthor("x");
-        book2.setTitle("y");
-        books.add(book2);
-        return books;
+        List<User> users = new ArrayList<>();
+        user.setFirstName("a");
+        user.setLastName("b");
+        user.setContact("c");
+        users.add(user);
+
+        User user2 = new User();
+        user.setFirstName("e");
+        user.setLastName("f");
+        user.setContact("g");
+        users.add(user2);
+        return users;
+
     }
-*//*
+
+    @PostMapping("/api/customers")
+    public Integer createUser(@RequestBody User user){
+        this.users.add(user);
+
+        return this.users.size() -1;
+    }
+    @GetMapping("/api/customers/{id}")
+    public User getUser(@PathVariable Integer id){
+        return this.users.get(id);
+
+    }
+}
+/*
+
     @GetMapping("/api/books")
     public List<Book> getBooks(@RequestParam(required = false) String bookAuthor){
         if (bookAuthor == null){
