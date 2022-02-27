@@ -24,9 +24,9 @@ public class UmbController {
         users.add(user);
 
         User user2 = new User();
-        user.setFirstName("e");
-        user.setLastName("f");
-        user.setEmail("g");
+        user2.setFirstName("e");
+        user2.setLastName("f");
+        user2.setEmail("g");
         users.add(user2);
         return users;
 
@@ -35,7 +35,7 @@ public class UmbController {
     private List<Book> init(){
         List<Book> books = new ArrayList<>();
         Book book = new Book();
-        book.id("w")
+        book.id("w");
         book.authorFirstName("Peter");
         book.authorLastName("Lynch");
         book.name("One up on Wall Street");
@@ -44,7 +44,7 @@ public class UmbController {
         books.add(book);
 
         Book book2 = new Book();
-        book2.id("q")
+        book2.id("q");
         book2.authorFirstName("x");
         book2.authorLastName("y");
         book2.name("z");
@@ -88,7 +88,7 @@ public class UmbController {
         List<Book> filteredBooks = new ArrayList<>();
 
         for(Book book : books){
-            if (book.getauthorFirstname().equals(bookAuthor)){
+            if (book.getAuthorFirstName().equals(bookAuthor)){
                 filteredBooks.add(book);
             }
         }

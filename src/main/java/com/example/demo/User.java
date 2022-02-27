@@ -14,21 +14,28 @@ public class User {
         this.email = email;
     }
 
-//krstne meno
+    //ID uzivatela
+    public String getId(){
+        return id;
+    }
+    public void setId(){
+        this.id = id;
+    }
+    //krstne meno uzivatela
     public String getFirstName(){
         return firstName;
     }
     public void setFirstName(){
         this.firstName = firstName;
     }
-//priezvisko
+    //priezvisko uzivatela
     public String getLastName(){
         return lastName;
     }
     public void setLastName(){
         this.lastName = lastName;
     }
-//email
+    //email uzivatela
     public String getEmail(){
         return email;
     }
