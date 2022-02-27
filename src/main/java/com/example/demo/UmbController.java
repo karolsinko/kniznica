@@ -35,19 +35,21 @@ public class UmbController {
     private List<Book> init(){
         List<Book> books = new ArrayList<>();
         Book book = new Book();
-        book.authorFirstname("Peter");
-        book.authorLastname("Lynch");
-        book.title("One up on Wall Street");
+        book.id("w")
+        book.authorFirstName("Peter");
+        book.authorLastName("Lynch");
+        book.name("One up on Wall Street");
         book.isbn("ISBN12A69C");
-        book.count("10");
+        book.bookCount("10");
         books.add(book);
 
         Book book2 = new Book();
-        book2.authorFirstname("x");
-        book2.authorLastname("y");
-        book2.title("z");
+        book2.id("q")
+        book2.authorFirstName("x");
+        book2.authorLastName("y");
+        book2.name("z");
         book2.isbn("t");
-        book2.count("1");
+        book2.bookCount("1");
         books.add(book2);
         return books;
     }

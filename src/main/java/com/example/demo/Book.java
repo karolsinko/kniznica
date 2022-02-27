@@ -17,4 +17,47 @@ public class Book {
         this.authorLastName = authorLastName;
         this.bookCount = bookCount;
     }
+    //ID knihy
+    public String getId(){
+        return id;
+    }
+    public void setId(){
+        this.id = id;
+    }
+    //Meno knihy
+    public String getName(){
+        return name;
+    }
+    public void setName(){
+        this.name = name;
+    }
+    //Krstne meno autora
+    public String getAuthorFirstName(){
+        return authorFirstName;
+    }
+    public void setAuthorFirstName(){
+        this.authorFirstName = authorFirstName;
+    }
+    //Priezvisko autora
+    public String getAuthorLastName(){
+        return authorLastName;
+    }
+    public void setAuthorLastName(){
+        this.authorLastName = authorLastName;
+    }
+    //ISBN knihy
+    public String getIsbn(){
+        return isbn;
+    }
+    public void setIsbn(){
+        this.isbn = isbn;
+    }
+    //Pocet knih
+    public String getBookCount(){
+        return bookCount;
+    }
+    public void getBookCount(){
+        this.bookCount = bookCount;
+    }
+}
 }
