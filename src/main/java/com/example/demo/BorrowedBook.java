@@ -2,8 +2,9 @@ package com.example.demo;
 
 public class BorrowedBook {
     private Long id;
-    private User borrower;
+    private String borrower;
     private Book book;
+    private String borrowing;
 
     public Long getId(){return this.id;}
 
@@ -11,14 +12,16 @@ public class BorrowedBook {
 
     public User getUser(){return this.borrower;}
 
-    public void setUser(User borrower){this.borrower=borrower;}
+    public void setUser(String borrower){this.borrower=borrower;}
 
     public Book getBook(){return this.book;}
 
-    public void setBook(Book book){this.book=book;}
+    public void setBook(String book){this.book=book;}
 
-    public boolean getBorrowing() { return false;
+    public boolean getBorrowing() { return borrowing;
     }
 
-    public boolean setBorrowing(){return true;}
+    public boolean setBorrowing(){this.borrowing=borrowing;}
+
+
 }
