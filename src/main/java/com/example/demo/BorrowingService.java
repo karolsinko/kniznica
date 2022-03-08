@@ -3,63 +3,76 @@ package com.example.demo;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import javax.transaction.Transactional;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BorrowingService {
-    private List<Borrowing> borrowings;
+    private final BorrowingRepository borrowingRepository;
 
-    private BorrowingService borrowingService;
-
-    public BorrowingController(){
-        this.borrowings =init();
+    public BorrowingService(BorrowingRepository borrowingRepository) {
+        this.borrowingRepository = borrowingRepository;
     }
 
-    private List<Borrowing> init(){
-        List<Borrowing> borrowing = new ArrayList<>();
+    private static BorrowingDto mapToBorrowingDto(BorrowingEntity borrowingEntity) {
+        BorrowingDto borrowingDto = new BorrowingDto();
 
-        Borrowing borrowing1 = new Borrowing();
-        borrowing1.setId("1");
-        borrowing1.setCustomerId("1");
-        borrowing1.setBookId("3");
+        borrowingDto.setBookId(borrowingEntity.getBookId());
+        borrowingDto.setCustomerId(borrowingEntity.getCustomerId());
 
-        borrowing.add(borrowing1);
-
-        Borrowing borrowing2 = new Borrowing();
-        borrowing2.setId("1");
-        borrowing2.setCustomerId("1");
-        borrowing2.setBookId("3");
-
-
-        borrowing.add(borrowing2);
-
-        return borrowing;
+        return borrowingDto;
     }
+    
 
-
-    public List<Borrowing> getBorrowing( String id){
-        if (id == null){
-            return this.borrowings;
+    @Transactional
+    public List<BorrowingDto> getBorrowings(String borrowwingId) {
+        List<BorrowingDto> ret = new LinkedList<>();
+        for (BorrowingEntity b1 : borrowingRepository.findAll()) {
+            BorrowingDto b2 = mapToBorrowingDto(b1);
+            ret.add(b2);
         }
-        List<Book> filteredBorrowings = new ArrayList<>();
+        return ret;
+    }
 
-        for(Borrowing borrowings : borrowings){
-            if (borrowings.getId().equals(id)){
-                filteredBorrowings.add(borrowings);
-            }
+    @Transactional
+    public BorrowingDto getBorrowing(Long id) {
+        Optional<BorrowingEntity> byId = borrowingRepository.findById(id);
+        if (byId.isPresent()) {
+            return mapToBorrowingDto(byId.get());
         }
-        return filteredBorrowings;
+        return null;
+    }
+
+    @Transactional
+    public Long createBorrowing(BorrowingDto borrowingDto) {
+        BorrowingEntity borrowingEntity = new BorrowingEntity();
+
+        borrowingEntity.setBookId(borrowingDto.getBookId());
+        borrowingEntity.setCustomerId(borrowingDto.getCustomerId());
+
+        this. borrowingRepository.save( borrowingEntity);
+
+        return  borrowingEntity.getId();
 
     }
 
-    public Integer createBorrowing(Borrowing borrowing){
-        this.borrowings.add(borrowing);
-        return borrowings;
+    @Transactional
+    public void updateBorrowing(int id,BorrowingDto borrowingDto) {
+        Optional<BorrowingEntity> byId = borrowingRepository.findById((long)id);
+        if (byId.isPresent()) {
+            byId.get().setBookId(borrowingDto.getBookId());
+            byId.get().setCustomerId(borrowingDto.getCustomerId());
+        }
     }
 
-    public void deleteBorrowing( Integer id){
-        this.borrowings.remove(this.borrowings.get(id));
-
+    @Transactional
+    public void deleteBorrowing(int id) {
+        Optional<BorrowingEntity> byId = borrowingRepository.findById((long)id);
+        if (byId.isPresent()) {
+            borrowingRepository.delete(byId.get());
+        }
     }
+
 }

@@ -8,4 +8,5 @@ import java.util.List;
 @Repository
 
 public interface BorrowingRepository extends CrudRepository<BorrowingEntity, Long>{
+
 }
