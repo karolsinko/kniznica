@@ -7,6 +7,5 @@ import java.util.List;
 
 @Repository
 
-public interface BorrowingRepository extends CrudRepository<BorrowingEntity, Long>{
-
+public interface CustomerRepository extends CrudRepository<CustomerEntity, Long> {
 }
