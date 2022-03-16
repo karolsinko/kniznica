@@ -1,75 +1,89 @@
-import com.example.demo.Book;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
+package com.example.demo;
 
-import java.util.ArrayList;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookService {
-    private List<Book> books;
+    private final BookRepository bookRepository;
 
-    public BookService(){
-        this.books = init();
+    public BookService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
     }
 
-    private List<Book> init(){
-        List<Book> books = new ArrayList<>();
+    private static BookDto mapToBookDto(BookEntity bookEntity) {
+        BookDto bookDto = new BookDto();
 
-        Book book1 = new Book();
-        book1.setAuthor("Arthur");
-        book1.setTitle("Study in Red");
+        bookDto.setId(bookEntity.getId());
+        bookDto.setTitle(bookEntity.getTitle());
+        bookDto.setIsbn(bookEntity.getIsbn());
+        bookDto.setAuthorFirstName(bookEntity.getAuthorFirstName());
+        bookDto.setAuthorLastName(bookEntity.getAuthorLastName());
+        bookDto.setBookCount(bookEntity.getBookCount());
 
-        books.add(book1);
-
-        Book book2 = new Book();
-        book2.setAuthor("J.R.R.");
-        book2.setTitle("The Hobbit");
-
-        books.add(book2);
-
-        return books;
+        return bookDto;
     }
 
-
-    public List<Book> getBooks(String bookAuthor){
-        if (bookAuthor == null){
-            return this.books;
+    @Transactional
+    public List<BookDto> getBooks(String bookAuthor) {
+        List<BookDto> book = new LinkedList<>();
+        for (BookEntity b1 : bookRepository.findAll()) {
+            BookDto b2 = mapToBookDto(b1);
+            book.add(b2);
         }
-        List<Book> filteredBooks = new ArrayList<>();
+        return book;
+    }
 
-        for(Book book : books){
-            if (book.getAuthor().equals(bookAuthor)){
-                filteredBooks.add(book);
-            }
+    @Transactional
+    public BookDto getBook(Long bookId) {
+        Optional<BookEntity> byId = bookRepository.findById(bookId);
+        if (byId.isPresent()) {
+            return mapToBookDto(byId.get());
         }
-        return filteredBooks;
-
+        return null;
     }
 
-    public Book getBook(Integer bookId){
-        return this.books.get(bookId);
+    @Transactional
+    public Long createBook(BookDto bookDto) {
+        BookEntity bookEntity = new BookEntity();
 
-    }
-    //@RequestParam(required = false) String lastname
-    //@GetMapping("/api/books")
-    //public Book queryBook(){
+        bookEntity.setId(bookDto.getId());
+        bookEntity.setTitle(bookDto.getTitle());
+        bookEntity.setIsbn(bookDto.getIsbn());
+        bookEntity.setAuthorFirstName(bookDto.getAuthorFirstName());
+        bookEntity.setAuthorLastName(bookDto.getAuthorLastName());
+        bookEntity.setBookCount(bookDto.getBookCount());
 
-    //}
+        this.bookRepository.save(bookEntity);
 
-    public Integer createBook(Book book){
-        this.books.add(book);
-        return this.books.size() -1;
-    }
-
-    public void deleteBook(Integer bookId){
-        this.books.remove(this.books.get(bookId));
-
+        return bookEntity.getId();
     }
 
-    public void updateBook(Integer bookId, Book book){
-        this.books.get(bookId).setTitle(book.getTitle());
-        this.books.get(bookId).setAuthor(book.getAuthor());
+    @Transactional
+    public void updateBook(int bookId, BookDto bookDto) {
+        Optional<BookEntity> byId = bookRepository.findById((long)bookId);
+        if (byId.isPresent()) {
+
+            byId.get().setId(bookDto.getId());
+            byId.get().setTitle(bookDto.getTitle());
+            byId.get().setIsbn(bookDto.getIsbn());
+            byId.get().setAuthorFirstName(bookDto.getAuthorFirstName());
+            byId.get().setAuthorLastName(bookDto.getAuthorLastName());
+            byId.get().setBookCount(bookDto.getBookCount());
+
+        }
+    }
+
+    @Transactional
+    public void deleteBook(int bookId) {
+        Optional<BookEntity> byId = bookRepository.findById((long)bookId);
+        if (byId.isPresent()) {
+            bookRepository.delete(byId.get());
+        }
     }
 
 }
