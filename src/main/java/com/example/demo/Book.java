@@ -1,9 +1,10 @@
 package com.example.demo;
 
-public class Book {
+public class Book  {
     private String author;
     private String title;
-    private boolean borrowed;
+    private String isbn;
+    private String id;
 
     public String getAuthor() {
         return author;
@@ -21,23 +22,19 @@ public class Book {
         this.title = title;
     }
 
-
-
-    public Book() {
-        this.borrowed = false;
+    public String getIsbn() {
+        return isbn;
     }
 
-    public void setToBorrowed() {
-        this.borrowed = true;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
-    public void setToReturned() {
-        this.borrowed = false;
+    public String getId() {
+        return id;
     }
 
-    public boolean isBorrowed() {
-        return this.borrowed;
+    public void setId(String id) {
+        this.id = id;
     }
-
-
 }

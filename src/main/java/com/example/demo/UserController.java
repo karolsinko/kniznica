@@ -13,20 +13,20 @@ import java.util.List;
             this.users = init();
         }
 
-        private List<User> init(){
+        public List<User> init(){
             List<User> users = new ArrayList<>();
             User user1 = new User();
-            user1.setId(1L);
-            user1.setFirstName("Jožko");
-            user1.setLastName("Mrkvička");
-            user1.setEmail("jozko@abc.sk");
+            user1.setId(Long.valueOf("c"));
+            user1.setFirstName("aa");
+            user1.setLastName("bb");
+            user1.setEmail("cc");
             users.add(user1);
 
             User user2 = new User();
-            user2.setId(2L);
-            user2.setFirstName("Hanka");
-            user2.setLastName("Nová");
-            user2.setEmail("hanka@abc.sk");
+            user2.setId(Long.valueOf("w"));
+            user2.setFirstName("a");
+            user2.setLastName("b");
+            user2.setEmail("c");
             users.add(user2);
             return users;
         }

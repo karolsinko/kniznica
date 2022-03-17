@@ -7,64 +7,49 @@ import java.util.List;
 
 @RestController
 public class BorrowingController {
-    private List<BorrowedBook> borrowings;
+     List<Borrowings> borrowings;
 
-    public BorrowingController(){
-        this.borrowings = init();
+    public void controllerBorrowings(){
+        this.borrowings = init3();
     }
 
-    private List<BorrowedBook> init(){
-        List<BorrowedBook> borrowings = new ArrayList<>();
-        BorrowedBook borrowing1 = new BorrowedBook();
-        borrowing1.setId(1L);
-        borrowing1.setUser("Jožko Mrkva");
-        borrowing1.setBook("Recepty");
-        borrowings.add(borrowing1);
+    public List<Borrowings> init3(){
+        List<Borrowings> borrowing = new ArrayList<>();
 
-        BorrowedBook borrowing2 = new BorrowedBook();
-        borrowing2.setId(2L);
-        borrowing1.setUser("Janko Nový");
-        borrowing1.setBook("Encyklopedia");
-        borrowings.add(borrowing2);
-        return borrowings;
+        Borrowings borrowings1 = new Borrowings();
+        borrowings1.setBorrowingId("1");
+        borrowing.add(borrowings1);
+
+        return borrowing;
     }
 
     @GetMapping("/api/borrowings")
-    public List<BorrowedBook> getBorrowings(@RequestParam(required = false) String BorrowedBook){
-        if (BorrowedBook == null){
+    public List<Borrowings> getBorrowings(@RequestParam(required = false) String borrowingId){
+        if(borrowingId == null){
             return this.borrowings;
         }
-        List<BorrowedBook> filteredBorrowings = new ArrayList<>();
 
-        for(BorrowedBook borrowing : borrowings){
-            if (borrowing.getBorrowing().equals(BorrowedBook)){
-                filteredBorrowings.add(borrowing);
+        List<Borrowings> filteredBorrowings = new ArrayList<>();
+
+        for (Borrowings borrowings : borrowings){
+            if(borrowings.getBorrowingId().equals(borrowingId)){
+                filteredBorrowings.add(borrowings);
             }
         }
+
         return filteredBorrowings;
-
-    }
-    @GetMapping("/api/borrowings/{borrowingId}")
-    public BorrowedBook getBorrowing(@PathVariable Integer borrowingId){
-        return this.borrowings.get(borrowingId);
-
     }
 
-
-    @PostMapping("/api/borrowings")
-    public Integer createBorrowing(@RequestBody BorrowedBook borrowing){
+    @PostMapping("api/borrowings")
+    public  List<Borrowings> createBorrowing(@RequestBody Borrowings borrowing){
         this.borrowings.add(borrowing);
 
-        return this.borrowings.size() -1;
+        return borrowings;
     }
+
     @DeleteMapping("/api/borrowings/{borrowingId}")
     public void deleteBorrowing(@PathVariable Integer borrowingId){
         this.borrowings.remove(this.borrowings.get(borrowingId));
-
-    }
-    @PutMapping("/api/borrowings/{borrowingId}")
-    public void updateBorrowing(@PathVariable Integer borrowingId, @RequestBody BorrowedBook borrowing){
-        this.borrowings.get(borrowingId).setBorrowing();
     }
 }
 
