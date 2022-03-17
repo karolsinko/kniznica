@@ -9,7 +9,7 @@ import java.util.List;
 public class UmbController {
     List<Book> books;
 
-    public void controllerBook(){
+    public UmbController(){
         this.books = init();
     }
 
