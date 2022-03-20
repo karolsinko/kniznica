@@ -1,15 +1,16 @@
 package com.example.demo;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
-public class UmbController {
-    List<Book> books;
+@Service
+public class BookService {
+    private List<Book> books;
 
-    public UmbController(){
+    public BookService(){
         this.books = init();
     }
 
@@ -17,24 +18,23 @@ public class UmbController {
         List<Book> books = new ArrayList<>();
 
         Book book1 = new Book();
-        book1.setAuthor("Haruki Murakami");
-        book1.setTitle("Norwegian Wood");
-        book1.setIsbn("0099448823");
-        book1.setId("1");
+        book1.setAuthor("a");
+        book1.setTitle("b");
+        book1.setIsbn("v");
+        book1.setId("d");
         books.add(book1);
 
         Book book2 = new Book();
-        book2.setAuthor("Conan");
-        book2.setTitle("Cau");
-        book2.setIsbn("456");
-        book2.setId("2");
+        book2.setAuthor("aa");
+        book2.setTitle("bb");
+        book2.setIsbn("cc");
+        book2.setId("dd");
         books.add(book2);
 
         return books;
     }
 
-    @GetMapping("/api/books")
-    public List<Book> getBooks(@RequestParam(required = false) String bookAuthor){
+    public List<Book> getBooks(String bookAuthor){
         if (bookAuthor == null){
             return this.books;
         }
@@ -50,13 +50,11 @@ public class UmbController {
         return filteredBooks;
     }
 
-    @GetMapping("/api/book/{bookId}") //search by {bookId}
-    public Book getBook(@PathVariable Integer bookId){
+    public Book getBook(int bookId){
         return this.books.get(bookId);
     }
 
-    @GetMapping("/api/id") //search by bookId
-    public List<Book> getBookId(@RequestParam(required = false) String bookId){
+    public List<Book> getBookId(String bookId){
         if (bookId == null){
             return this.books;
         }
@@ -72,8 +70,7 @@ public class UmbController {
         return filteredBooks;
     }
 
-    @GetMapping("/api/isbn") //search by bookIsbn
-    public List<Book> getBookIsbn(@RequestParam(required = false) String bookIsbn){
+    public List<Book> getBookIsbn(String bookIsbn){
         if (bookIsbn == null){
             return this.books;
         }
@@ -89,19 +86,16 @@ public class UmbController {
         return filteredBooks;
     }
 
-    @PostMapping("/api/books") //create new book
-    public List<Book> createBook(@RequestBody Book book){
+    public List<Book> createBook(Book book){
         this.books.add(book);
         return books;
     }
 
-    @DeleteMapping("/api/books/{bookId}")
-    public void deleteBook(@PathVariable Integer bookId){
+    public void deleteBook(int bookId){
         this.books.remove(this.books.get(bookId));
     }
 
-    @PutMapping("/api/books/{bookId}") //update by {book}
-    public List<Book> putBook(@PathVariable Integer bookId, @RequestBody Book book){
+    public List<Book> putBook(int bookId, Book book){
         this.books.get(bookId).setId(book.getId());
         this.books.get(bookId).setAuthor(book.getAuthor());
         this.books.get(bookId).setTitle(book.getTitle());

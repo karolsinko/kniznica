@@ -5,7 +5,6 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
-    private String name;
 
     public String getFirstName() {return this.firstName;}
 
@@ -22,12 +21,6 @@ public class User {
     public Long getId(){return this.id;}
 
     public void setId(Long id){this.id=id;}
-
-    public String getUser(){
-        name=firstName+" "+lastName;
-        return name;}
-
-    public void setUser(String name){this.name=name;}
 
 }
 
