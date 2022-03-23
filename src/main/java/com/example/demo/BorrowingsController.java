@@ -4,11 +4,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 public class BorrowingsController {
+
     private List<Borrowings> borrowings;
 
     private BorrowingsService borrowingsService;
 
-    public controllerBorrowings(BorrowingsService borrowingsService){
+    public BorrowingsController(BorrowingsService borrowingsService){
         this.borrowingsService = borrowingsService;
     }
 
