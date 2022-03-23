@@ -8,7 +8,6 @@ import java.util.List;
 
 @Service
 public class BorrowingsService {
-
     private List<Borrowings> borrowings;
 
     private BorrowingsService borrowingsService;

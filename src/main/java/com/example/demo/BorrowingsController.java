@@ -3,9 +3,7 @@ package com.example.demo;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 public class BorrowingsController {
-
     private List<Borrowings> borrowings;
 
     private BorrowingsService borrowingsService;
