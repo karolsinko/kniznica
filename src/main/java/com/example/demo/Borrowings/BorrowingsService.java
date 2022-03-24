@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.Borrowings;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +8,6 @@ import java.util.List;
 
 @Service
 public class BorrowingsService {
-
     private List<Borrowings> borrowings;
 
     private BorrowingsService borrowingsService;
@@ -50,7 +49,6 @@ public class BorrowingsService {
 
         return borrowings;
     }
-
     @DeleteMapping("/api/borrowings/{borrowingId}")
     public void deleteBorrowing(Integer borrowingId){
         this.borrowings.remove(this.borrowings.get(borrowingId));
