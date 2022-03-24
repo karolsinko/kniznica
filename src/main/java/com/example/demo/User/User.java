@@ -1,7 +1,7 @@
 package com.example.demo.User;
 
 public class User {
-    private Long id;
+    private String id;
     private String firstName;
     private String lastName;
     private String email;
@@ -18,9 +18,9 @@ public class User {
 
     public void setEmail(String email) {this.email=email;}
 
-    public Long getId(){return this.id;}
+    public String getId(){return id;}
 
-    public void setId(Long id){this.id=id;}
+    public void setId(String id){this.id=id;}
 
 }
 
