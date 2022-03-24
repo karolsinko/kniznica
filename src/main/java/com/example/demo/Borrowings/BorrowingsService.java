@@ -49,7 +49,6 @@ public class BorrowingsService {
 
         return borrowings;
     }
-
     @DeleteMapping("/api/borrowings/{borrowingId}")
     public void deleteBorrowing(Integer borrowingId){
         this.borrowings.remove(this.borrowings.get(borrowingId));
