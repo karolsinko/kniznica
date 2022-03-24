@@ -1,10 +1,13 @@
-package com.example.demo;
+package com.example.demo.Borrowings;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@RestController
 import java.util.List;
 public class BorrowingsController {
-
     private List<Borrowings> borrowings;
 
     private BorrowingsService borrowingsService;
